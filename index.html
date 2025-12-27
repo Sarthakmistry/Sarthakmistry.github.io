@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Mistry | Data Engineer & Data Scientist</title>
+    <style>
+        :root { --primary: #2563eb; --dark: #1e293b; --light: #f8fafc; --text: #334155; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background: var(--light); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background: var(--dark); color: white; padding: 2rem 10%; text-align: center; }
+        .container { width: 80%; margin: 2rem auto; display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; }
+        .sidebar { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: fit-content; }
+        .main-content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: var(--dark); margin-top: 0; }
+        .badge { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.3rem; display: inline-block; margin-bottom: 0.3rem; }
+        .exp-item, .project-item { margin-bottom: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+        .date { color: #64748b; font-size: 0.9rem; font-weight: bold; }
+        .contact-link { display: block; margin-bottom: 0.5rem; color: var(--primary); text-decoration: none; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sarthak Mistry</h1>
+    <p>MS in Data Science @ Indiana University | Data Engineer</p>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>Contact</h3>
+        <a class="contact-link" href="mailto:sarmist@iu.edu">sarmist@iu.edu</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/sarthak-mistry-072461199/">LinkedIn</a>
+        <a class="contact-link" href="https://github.com/Sarthakmistry">GitHub</a>
+        <p>📍 Open to relocation</p>
+        <hr>
+        <h3>Skills</h3>
+        <p><strong>Languages:</strong> Python, SQL, JavaScript, R</p>
+        <p><strong>Databases/ETL:</strong> Snowflake, Airflow, Spark, Kafka, MongoDB, PostgreSQL</p>
+        <p><strong>Tools:</strong> AWS, Talend, Streamlit, Power BI, Grafana</p>
+        <hr>
+        <a href="Resume_SarthakM.pdf" style="display:block; text-align:center; background:var(--primary); color:white; padding:10px; border-radius:5px; text-decoration:none;">Download Full Resume</a>
+    </aside>
+
+    <main class="main-content">
+        <section>
+            <h2>Professional Experience</h2>
+            <div class="exp-item">
+                <h3>Data Engineer 1 | Piramal Capital & Housing Finance</h3>
+                <span class="date">Jul 2022 – Jul 2024</span>
+                <ul>
+                    [cite_start]<li>Reduced PII exposure risk by 93% using regex and Snowflake dynamic masking[cite: 7].</li>
+                    [cite_start]<li>Developed Django web app for PII policy management, cutting request time by 33%[cite: 8].</li>
+                    [cite_start]<li>Automated 150-feature data mart using AWS Lambda and S3, improving efficiency by 40%[cite: 9].</li>
+                    [cite_start]<li>Built real-time CDC pipelines using Debezium, Kafka, and Spark Streaming[cite: 11].</li>
+                </ul>
+            </div>
+            
+            <div class="exp-item">
+                <h3>Intern Dex Analytics | National Stock Exchange IT</h3>
+                <span class="date">Oct 2021 – Mar 2022</span>
+                <ul>
+                    [cite_start]<li>Transformed flat files for Kibana ingestion via Logstash[cite: 17].</li>
+                    [cite_start]<li>Built observability dashboards for candidate demographics and performance[cite: 18].</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Featured Projects</h2>
+            <div class="project-item">
+                <h3>Live Blockchain Transactions Pipeline</h3>
+                <span class="badge">Spark</span> <span class="badge">Kafka</span> <span class="badge">Trino</span> <span class="badge">Hudi</span>
+                [cite_start]<p>Designed a 3-node cluster implementing Kappa architecture for real-time Bitcoin transaction analysis[cite: 21]. [cite_start]Trained a KMeans model to detect transaction anomalies in real-time[cite: 22, 24].</p>
+            </div>
+
+            <div class="project-item">
+                <h3>Data Lineage Application for Snowflake</h3>
+                <span class="badge">Django</span> <span class="badge">Snowflake</span> <span class="badge">VisJS</span>
+                [cite_start]<p>Developed interactive visualization tool for table and column-level lineage using Django REST APIs and VisJS[cite: 28, 29].</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <p><strong>MS in Data Science</strong> | [cite_start]Indiana University <span class="date">(Expected May 2026)</span> [cite: 34, 37]</p>
+            <p><strong>BE in Electronics & Telecommunication</strong> | [cite_start]University of Mumbai [cite: 35, 36]</p>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>
