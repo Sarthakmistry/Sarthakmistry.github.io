@@ -55,20 +55,24 @@ nav{
 }
 
 /* ── Network Canvas (hero + about only) ── */
-.network-bg{
+.network-wrap{
   position:absolute;top:0;left:0;width:100%;height:100%;
-  z-index:0;pointer-events:none;
+  z-index:0;pointer-events:none;overflow:hidden;
+}
+.network-bg{
+  width:100%;height:100%;display:block;
 }
 
 /* ── Hero ── */
-.hero{justify-content:space-between;overflow:hidden}
+.hero{justify-content:stretch;display:grid;grid-template-columns:3fr 2fr;gap:0;padding:0}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:48px;position:relative;z-index:1;min-width:0}
 .hero-tagline{
   font-size:clamp(16px,2.2vw,26px);font-weight:300;
   color:var(--gray2);line-height:1.6;
   max-width:520px;margin-bottom:auto;
-  padding-top:140px;position:relative;z-index:1;
+  padding-top:140px;
 }
-.hero-bottom{position:relative;z-index:1;margin-top:auto}
+.hero-bottom{margin-top:auto}
 .hero-name-top{
   font-size:clamp(28px,4.5vw,56px);font-weight:700;
   text-transform:uppercase;color:var(--white);
@@ -76,7 +80,7 @@ nav{
   margin-bottom:12px;opacity:.9;
 }
 .hero-typing-line{
-  font-size:clamp(52px,9vw,140px);font-weight:700;
+  font-size:clamp(40px,7vw,110px);font-weight:700;
   text-transform:uppercase;color:var(--white);
   letter-spacing:-.04em;line-height:.9;
   min-height:1.1em;display:flex;align-items:baseline;
@@ -91,8 +95,26 @@ nav{
 .hero-subtitle{
   font-size:clamp(13px,1.4vw,16px);color:var(--gray3);
   margin-top:20px;margin-bottom:0;font-weight:400;
-  position:relative;z-index:1;
 }
+.hero-right{
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:100px 48px 48px 0;position:relative;z-index:2;
+}
+
+/* Horizontal DAG */
+.dag-h{width:100%;max-width:640px;position:relative;z-index:2}
+.dag-h svg{width:100%;height:auto;display:block}
+.dag-status-dot{transition:fill .5s}
+.dag-status-text{transition:fill .5s}
+.dag-status-dot.queued{fill:#525252}
+.dag-status-dot.running{fill:#b45309}
+.dag-status-dot.success{fill:#16a34a}
+.dag-status-text.queued{fill:#a3a3a3}
+.dag-status-text.running{fill:#fbbf24}
+.dag-status-text.success{fill:#4ade80}
+/* Active task highlight */
+.dag-task .dag-border{transition:stroke .4s,stroke-width .4s}
+.dag-task.active .dag-border{stroke:#e5e5e5;stroke-width:1.5}
 
 /* ── Content Sections ── */
 .content-section{
@@ -149,14 +171,14 @@ nav{
 }
 .project-card:hover{border-color:var(--gray4)}
 .project-arch{
-  width:100%;height:180px;border-radius:8px;
-  background:var(--gray7);border:1px dashed var(--gray5);
+  width:100%;aspect-ratio:16/9;border-radius:8px;
+  background:#ffffff;
   display:flex;align-items:center;justify-content:center;
   margin-bottom:20px;overflow:hidden;
   color:var(--gray4);font-size:11px;letter-spacing:1px;text-transform:uppercase;
   flex-direction:column;gap:8px;
 }
-.project-arch img{width:100%;height:100%;object-fit:cover;border-radius:7px}
+.project-arch img{width:100%;height:100%;object-fit:contain;padding:8px;border-radius:7px}
 .project-arch svg{opacity:.3}
 .project-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}
 .project-name{font-size:18px;font-weight:600;color:var(--white)}
@@ -264,17 +286,22 @@ nav{
 .about-socials a svg{width:20px;height:20px}
 .about-right{display:flex;align-items:center;justify-content:center;padding:48px;position:relative;overflow:hidden}
 
-/* DAG */
-.dag-container{width:100%;max-width:420px}
-.dag-container svg{width:100%;height:auto}
-.dag-node{opacity:0;animation:dagNodeIn .5s ease forwards}
-.dag-edge{stroke-dasharray:200;stroke-dashoffset:200;animation:dagEdgeDraw 1s ease forwards}
-.dag-pulse{animation:dagPulse 2s ease-in-out infinite}
-@keyframes dagNodeIn{to{opacity:1}}
-@keyframes dagEdgeDraw{to{stroke-dashoffset:0}}
-@keyframes dagPulse{0%,100%{opacity:.6}50%{opacity:1}}
-@keyframes dagGlow{0%,100%{filter:drop-shadow(0 0 2px rgba(255,255,255,.1))}50%{filter:drop-shadow(0 0 8px rgba(255,255,255,.25))}}
-.dag-container svg{animation:dagGlow 4s ease-in-out infinite}
+/* Photo circle */
+.about-photo-circle{
+  width:clamp(260px,26vw,380px);height:clamp(260px,26vw,380px);
+  border-radius:50%;overflow:hidden;
+  border:2px solid var(--gray6);
+  box-shadow:0 0 60px rgba(255,255,255,.04);flex-shrink:0;
+}
+.about-photo-circle img{width:100%;height:100%;object-fit:cover}
+.about-photo-circle:hover img{filter:brightness(1.05)}
+.about-photo-placeholder{
+  width:100%;height:100%;background:var(--gray7);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;color:var(--gray4);
+}
+.about-photo-placeholder svg{opacity:.3}
+.about-photo-placeholder span{font-size:10px;letter-spacing:1px;text-transform:uppercase}
 
 /* ── Footer ── */
 .footer{
@@ -297,8 +324,11 @@ nav{
   nav{padding:20px 24px}
   .nav-links a:not(.nav-cta){display:none}
   .section{padding:24px}
+  .hero{grid-template-columns:1fr;padding:0}
+  .hero-left{padding:24px;padding-top:100px}
+  .hero-right{padding:0 24px 24px;min-height:200px}
+  .hero-tagline{padding-top:0}
   .content-section{padding:80px 24px 24px}
-  .hero-tagline{padding-top:100px}
   .exp-item{grid-template-columns:1fr;gap:8px}
   .project-card{min-width:75vw;max-width:75vw}
   .skills-edu-split{grid-template-columns:1fr}
@@ -309,7 +339,7 @@ nav{
   .contact-info{padding-right:0}
   .about-section{grid-template-columns:1fr}
   .about-left{padding:80px 24px 32px}
-  .about-right{padding:0 24px 40px;min-height:300px}
+  .about-right{padding:0 24px 40px}
   .about-title{font-size:clamp(28px,8vw,48px)}
   .about-bottom{flex-direction:column;align-items:flex-start;gap:20px}
   .section-title{font-size:clamp(28px,8vw,56px)}
@@ -322,15 +352,18 @@ nav{
   .nav-logo{font-size:15px}
   .nav-cta{padding:8px 16px;font-size:11px}
   .section{padding:20px}
+  .hero-left{padding:20px;padding-top:80px}
+  .hero-right{padding:0 20px 20px}
   .content-section{padding:72px 20px 20px}
   .project-card{min-width:85vw;max-width:85vw;padding:20px}
   .footer{padding:16px 20px;flex-direction:column;gap:8px;text-align:center}
   .about-left{padding:72px 20px 24px}
-  .about-right{padding:0 20px 24px;min-height:240px}
+  .about-right{padding:0 20px 24px}
   .about-text{font-size:14px}
   .hero-typing-line{font-size:clamp(36px,12vw,80px)}
   .hero-name-top{font-size:clamp(18px,5vw,28px)}
-  .hero-tagline{font-size:clamp(14px,3.5vw,18px);padding-top:80px}
+  .hero-tagline{font-size:clamp(14px,3.5vw,18px)}
+  .about-photo-circle{width:220px;height:220px}
 }
 
 /* paw prints */
@@ -358,23 +391,89 @@ nav{
 
 <!-- Hero -->
 <section class="section hero">
-  <canvas class="network-bg" id="network-hero"></canvas>
-  <div class="hero-tagline reveal">
-    I'm Specialized in<br>
-    Building Data Pipelines &amp; Infrastructure.
-  </div>
-  <div class="hero-bottom">
-    <div class="hero-name-top reveal">SARTHAK MISTRY</div>
-    <div class="hero-typing-line">
-      <span class="hero-typing-prefix">DATA</span><span class="hero-typing-word blink" id="typing-target"></span>
+  <div class="network-wrap"><canvas class="network-bg" id="network-hero"></canvas></div>
+  <div class="hero-left">
+    <div class="hero-tagline reveal">
+      I'm Specialized in<br>
+      Building and Designing Data Pipelines &amp; Infrastructure.
     </div>
-    <div class="hero-subtitle reveal reveal-delay-1">MS Data Science @ Indiana University &middot; Open to Relocation</div>
+    <div class="hero-bottom">
+      <div class="hero-name-top reveal">SARTHAK MISTRY</div>
+      <div class="hero-typing-line">
+        <span class="hero-typing-prefix">DATA</span><span class="hero-typing-word blink" id="typing-target"></span>
+      </div>
+      <div class="hero-subtitle reveal reveal-delay-1">MS Data Science @ Indiana University &middot; Open to Relocation</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="dag-h">
+      <svg viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Row 1: Ingest → Process → Store -->
+        <line x1="100" y1="70" x2="170" y2="70" stroke="#333" stroke-width="1"/><polygon points="167,66 175,70 167,74" fill="#333"/>
+        <line x1="290" y1="70" x2="360" y2="70" stroke="#333" stroke-width="1"/><polygon points="357,66 365,70 357,74" fill="#333"/>
+        <!-- Store ↓ Analyze -->
+        <path d="M440 98 L440 175" stroke="#333" stroke-width="1" fill="none"/><polygon points="436,172 440,180 444,172" fill="#333"/>
+        <!-- Row 2: Analyze ← Visualize ← Deliver -->
+        <line x1="380" y1="230" x2="310" y2="230" stroke="#333" stroke-width="1"/><polygon points="313,226 305,230 313,234" fill="#333"/>
+        <line x1="190" y1="230" x2="120" y2="230" stroke="#333" stroke-width="1"/><polygon points="123,226 115,230 123,234" fill="#333"/>
+
+        <!-- NODE: Ingest -->
+        <g class="dag-task" data-delay="0">
+          <rect class="dag-border" x="10" y="42" width="90" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="55" y="62" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="500">Ingest</text>
+          <rect x="18" y="72" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="29" cy="80" r="3.5" class="dag-status-dot queued"/>
+          <text x="40" y="83" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+        <!-- NODE: Process -->
+        <g class="dag-task" data-delay="1">
+          <rect class="dag-border" x="190" y="42" width="100" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="240" y="62" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="500">Process</text>
+          <rect x="202" y="72" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="213" cy="80" r="3.5" class="dag-status-dot queued"/>
+          <text x="224" y="83" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+        <!-- NODE: Store -->
+        <g class="dag-task" data-delay="2">
+          <rect class="dag-border" x="385" y="42" width="90" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="430" y="62" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="500">Store</text>
+          <rect x="393" y="72" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="404" cy="80" r="3.5" class="dag-status-dot queued"/>
+          <text x="415" y="83" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+        <!-- NODE: Analyze -->
+        <g class="dag-task" data-delay="3">
+          <rect class="dag-border" x="385" y="202" width="95" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="432" y="222" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="500">Analyze</text>
+          <rect x="395" y="232" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="406" cy="240" r="3.5" class="dag-status-dot queued"/>
+          <text x="417" y="243" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+        <!-- NODE: Visualize -->
+        <g class="dag-task" data-delay="4">
+          <rect class="dag-border" x="195" y="202" width="105" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="247" y="222" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="500">Visualize</text>
+          <rect x="207" y="232" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="218" cy="240" r="3.5" class="dag-status-dot queued"/>
+          <text x="229" y="243" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+        <!-- NODE: Deliver -->
+        <g class="dag-task" data-delay="5">
+          <rect class="dag-border" x="10" y="202" width="105" height="56" rx="6" fill="none" stroke="#404040"/>
+          <text x="62" y="222" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="Inter,sans-serif" font-weight="600">Deliver</text>
+          <rect x="22" y="232" width="72" height="16" rx="4" fill="#111" stroke="#333" stroke-width=".5"/>
+          <circle cx="33" cy="240" r="3.5" class="dag-status-dot queued"/>
+          <text x="44" y="243" class="dag-status-text queued" font-size="8" font-family="Inter,sans-serif">queued</text>
+        </g>
+
+      </svg>
+    </div>
   </div>
 </section>
 
 <!-- About Me -->
 <section class="about-section" id="about">
-  <canvas class="network-bg" id="network-about"></canvas>
+  <div class="network-wrap"><canvas class="network-bg" id="network-about"></canvas></div>
   <div class="about-left">
     <div class="about-title reveal">About Me</div>
     <p class="about-text reveal reveal-delay-1">
@@ -396,31 +495,25 @@ nav{
     </div>
   </div>
   <div class="about-right reveal">
-    <div class="dag-container">
-      <svg viewBox="0 0 400 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line class="dag-edge" x1="200" y1="52" x2="100" y2="120" stroke="#404040" stroke-width="1" style="animation-delay:.6s"/>
-        <line class="dag-edge" x1="200" y1="52" x2="300" y2="120" stroke="#404040" stroke-width="1" style="animation-delay:.7s"/>
-        <line class="dag-edge" x1="100" y1="160" x2="140" y2="220" stroke="#404040" stroke-width="1" style="animation-delay:1s"/>
-        <line class="dag-edge" x1="300" y1="160" x2="260" y2="220" stroke="#404040" stroke-width="1" style="animation-delay:1.1s"/>
-        <line class="dag-edge" x1="140" y1="260" x2="200" y2="320" stroke="#404040" stroke-width="1" style="animation-delay:1.4s"/>
-        <line class="dag-edge" x1="260" y1="260" x2="200" y2="320" stroke="#404040" stroke-width="1" style="animation-delay:1.5s"/>
-        <line class="dag-edge" x1="200" y1="360" x2="200" y2="410" stroke="#404040" stroke-width="1" style="animation-delay:1.8s"/>
-        <circle r="2.5" fill="#e5e5e5" opacity=".7"><animateMotion dur="2.5s" repeatCount="indefinite" begin="1s"><mpath href="#p1"/></animateMotion></circle>
-        <circle r="2.5" fill="#e5e5e5" opacity=".7"><animateMotion dur="2.5s" repeatCount="indefinite" begin="1.3s"><mpath href="#p2"/></animateMotion></circle>
-        <circle r="2" fill="#e5e5e5" opacity=".5"><animateMotion dur="3s" repeatCount="indefinite" begin="1.8s"><mpath href="#p3"/></animateMotion></circle>
-        <circle r="2" fill="#e5e5e5" opacity=".5"><animateMotion dur="3s" repeatCount="indefinite" begin="2.2s"><mpath href="#p4"/></animateMotion></circle>
-        <path id="p1" d="M200 52 L100 140 L140 240 L200 340 L200 430" fill="none" stroke="none"/>
-        <path id="p2" d="M200 52 L300 140 L260 240 L200 340 L200 430" fill="none" stroke="none"/>
-        <path id="p3" d="M100 140 L140 240 L200 340" fill="none" stroke="none"/>
-        <path id="p4" d="M300 140 L260 240 L200 340" fill="none" stroke="none"/>
-        <g class="dag-node" style="animation-delay:.2s"><rect x="145" y="20" width="110" height="32" rx="6" fill="none" stroke="#525252"/><text x="200" y="41" text-anchor="middle" fill="#a3a3a3" font-size="11" font-family="Inter,sans-serif" font-weight="500">INGEST</text></g>
-        <g class="dag-node" style="animation-delay:.5s"><rect x="40" y="120" width="120" height="40" rx="6" fill="none" stroke="#525252"/><text x="100" y="137" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter,sans-serif">Batch</text><text x="100" y="151" text-anchor="middle" fill="#525252" font-size="9" font-family="Inter,sans-serif">S3 · Salesforce · API</text></g>
-        <g class="dag-node" style="animation-delay:.6s"><rect x="240" y="120" width="120" height="40" rx="6" fill="none" stroke="#525252"/><text x="300" y="137" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter,sans-serif">Streaming</text><text x="300" y="151" text-anchor="middle" fill="#525252" font-size="9" font-family="Inter,sans-serif">Kafka · CDC · WS</text></g>
-        <g class="dag-node" style="animation-delay:.9s"><rect x="75" y="220" width="130" height="40" rx="6" fill="none" stroke="#525252"/><text x="140" y="237" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter,sans-serif">Transform</text><text x="140" y="251" text-anchor="middle" fill="#525252" font-size="9" font-family="Inter,sans-serif">Spark · dbt · Airflow</text></g>
-        <g class="dag-node" style="animation-delay:1s"><rect x="195" y="220" width="130" height="40" rx="6" fill="none" stroke="#525252"/><text x="260" y="237" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter,sans-serif">Quality</text><text x="260" y="251" text-anchor="middle" fill="#525252" font-size="9" font-family="Inter,sans-serif">GE · PII Masking</text></g>
-        <g class="dag-node" style="animation-delay:1.3s"><rect x="135" y="320" width="130" height="40" rx="6" fill="none" stroke="#525252"/><text x="200" y="337" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter,sans-serif">Model</text><text x="200" y="351" text-anchor="middle" fill="#525252" font-size="9" font-family="Inter,sans-serif">Snowflake · Star Schema</text></g>
-        <g class="dag-node dag-pulse" style="animation-delay:1.6s"><rect x="145" y="410" width="110" height="36" rx="8" fill="#262626" stroke="#e5e5e5" stroke-width="1.5"/><text x="200" y="433" text-anchor="middle" fill="#ffffff" font-size="11" font-family="Inter,sans-serif" font-weight="600">DELIVER</text></g>
-      </svg>
+    <div class="about-photo-circle">
+      <!-- 
+        TO ADD YOUR PHOTO: Replace the placeholder div below with:
+        <img src="your-photo.jpg" alt="Sarthak Mistry">
+        
+        TO CHANGE CIRCLE SIZE: Edit .about-photo-circle in CSS:
+        width:clamp(MIN, PREFERRED, MAX);height:clamp(MIN, PREFERRED, MAX);
+        Current: clamp(260px, 26vw, 380px) — meaning:
+          - 260px minimum
+          - 26vw preferred (scales with viewport)
+          - 380px maximum
+        Example: To make it bigger, change to clamp(300px, 30vw, 440px)
+        The 480px media query also has a mobile override (currently 220px).
+      -->
+      <img src="images/professional_photo.jpg" alt="Sarthak Mistry">
+      <div class="about-photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Your Photo</span>
+      </div>
     </div>
   </div>
 </section>
@@ -434,6 +527,18 @@ nav{
   </div>
   <div class="exp-grid">
     <div class="exp-item reveal">
+      <div class="exp-date">Jan 2026 &ndash; Present</div>
+      <div class="exp-content">
+        <div class="exp-role">Graduate Research Assistant</div>
+        <div class="exp-company">Indiana University, Bloomington</div>
+        <ul class="exp-desc">
+          <li>Designing a unified API layer for OpenBT to enable load/save operations across cloud storage services (Arweave).</li>
+          <li>Conducting validation experiments to benchmark code reliability and accuracy for the C++-to-Rust translation of OpenBT.</li>
+        </ul>
+        <div class="exp-tags"><span class="tag">C++</span><span class="tag">Rust</span><span class="tag">Arweave</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
       <div class="exp-date">Aug 2025 &ndash; Present</div>
       <div class="exp-content">
         <div class="exp-role">Graduate Teaching Assistant</div>
@@ -446,6 +551,17 @@ nav{
       </div>
     </div>
     <div class="exp-item reveal">
+      <div class="exp-date">Jan 2025 &ndash; Sep 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">Data Engineer</div>
+        <div class="exp-company">Project 990</div>
+        <ul class="exp-desc">
+          <li>Automated Pipeline for Ingesting yearly county level data from Bureau of Economic Analysis, Bureau of Labor Statistics and American Census Survey.</li>
+        </ul>
+        <div class="exp-tags"><span class="tag">C++</span><span class="tag">Rust</span><span class="tag">Arweave</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
       <div class="exp-date">Jul 2022 &ndash; Jul 2024</div>
       <div class="exp-content">
         <div class="exp-role">Data Engineer 1</div>
@@ -455,6 +571,7 @@ nav{
           <li>Improved regulatory reporting efficiency by ~40% automating a 150-feature Snowflake data mart</li>
           <li>Reduced PII exposure risk with automated masking, 93% precision across 1M+ records</li>
           <li>Built real-time CDC pipeline using Debezium, Kafka, and Spark Streaming</li>
+          <li>Automated economic data scraping using Python and Selenium, improving operational efficiency by 73%.</li>
           <li>Increased ingestion speed by 46% automating AWS Lambda S3-to-Snowflake loads</li>
         </ul>
         <div class="exp-tags"><span class="tag">Snowflake</span><span class="tag">Spark</span><span class="tag">Kafka</span><span class="tag">Airflow</span><span class="tag">AWS</span><span class="tag">Debezium</span></div>
@@ -466,11 +583,11 @@ nav{
         <div class="exp-role">Intern &mdash; Dex Analytics</div>
         <div class="exp-company">NSEIT, Mumbai</div>
         <ul class="exp-desc">
-          <li>Engineered CI/CD pipeline for dbt models in PostgreSQL, reducing dashboard latency by 40%</li>
-          <li>Reduced data ingestion errors by 25% with automated dbt schema validations</li>
+          <li>Accelerated delivery cycles by engineering a CI/CD pipeline for dbt models in PostgreSQL, automating pre-aggregated data modeling and reducing dashboard query latency by 40%.</li>
+          <li>Reduced data ingestion errors by 25% by implementing automated dbt schema validations and data quality tests for candidate demographic datasets prior to Kibana visualization.</li>
         </ul>
         <div class="exp-tags"><span class="tag">dbt</span><span class="tag">PostgreSQL</span><span class="tag">Kibana</span><span class="tag">CI/CD</span></div>
-      </div>
+      </div> 
     </div>
   </div>
 </section>
@@ -485,9 +602,36 @@ nav{
   <div class="projects-scroll-wrap">
     <div class="projects-scroll">
       <div class="project-card">
-        
+        <div class="project-arch">
+          <img src="images/architecture.png" alt="Architecture">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><line x1="10" y1="6.5" x2="14" y2="6.5"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="17.5" y1="10" x2="17.5" y2="14"/></svg>
+          <span>Architecture Diagram</span>
+        </div>
         <div class="project-top">
-          <div class="project-name">Blockchain Transactions Pipeline</div>
+          <div class="project-name">E-Commerce Medallion Pipeline</div>
+          <a href="https://github.com/Sarthakmistry/ecommerce-data-pipeline" target="_blank" class="project-gh">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="project-stack">Airflow &middot; Astronomer &middot; DBT &middot; Snowflake &middot; Great Expectations</div>
+        <div class="project-desc">End to end  data pipeline on Snowflake with a 4-layer medallion architecture (RAW → Staging → Data Vault 2.0 → Star Schema) across 17 dbt models.</div>
+        <ul class="project-bullets">
+          <li>50+ data quality expectations across 7 suites using Great Expectations</li>
+          <li>Data Vault 2.0 layer with 3 hubs, 2 satellites, and 1 link table using MD5 hash-diff change detection and incremental loading.</li>
+          <li>2 Airflow DAGs via Astro CLI and Cosmos, rendering each dbt model as an individual task.</li>
+          <li>Data Mart with RFM customer segmentation, product performance tiers, MoM growth, rolling revenue windows, and running aggregates.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-arch">
+          <img src="images/blockchain.png" alt="Architecture">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><line x1="10" y1="6.5" x2="14" y2="6.5"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="17.5" y1="10" x2="17.5" y2="14"/></svg>
+          <span>Architecture Diagram</span>
+        </div>
+        <div class="project-top">
+          <div class="project-name">Blockchain Streaming Pipeline</div>
           <a href="https://github.com/Sarthakmistry/Blockchain-pipeline" target="_blank" class="project-gh">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             GitHub
@@ -504,15 +648,19 @@ nav{
       </div>
 
       <div class="project-card">
-        
+        <div class="project-arch">
+          <img src="images/data_lineage_app.png" alt="Architecture">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><line x1="10" y1="6.5" x2="14" y2="6.5"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="17.5" y1="10" x2="17.5" y2="14"/></svg>
+          <span>Architecture Diagram</span>
+        </div>
         <div class="project-top">
-          <div class="project-name">Data Lineage App for Snowflake</div>
+          <div class="project-name">Data Lineage Application</div>
           <a href="https://github.com/Sarthakmistry/DataLineage" target="_blank" class="project-gh">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             GitHub
           </a>
         </div>
-        <div class="project-stack">SNOWFLAKE &middot; DJANGO &middot; VISJS &middot; AJAX</div>
+        <div class="project-stack">SNOWFLAKE &middot; DJANGO &middot; VISJS &middot; React</div>
         <div class="project-desc">Interactive visualization of table and column-level data lineage with dynamic graph traversal.</div>
         <ul class="project-bullets">
           <li>Complex SQL integrating Snowflake metadata views</li>
@@ -573,6 +721,15 @@ nav{
         <div class="edu-date">May 2022</div>
         <div class="edu-degree">BE in Electronics &amp; Telecommunication</div>
         <div class="edu-school">University of Mumbai</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-date">June 2022</div>
+        <div class="edu-degree">Artificial Intelligence &amp; Machine Learning Graduate</div>
+        <div class="edu-school">IBM</div>
+        <a href="https://www.credly.com/badges/418e7dea-39b3-4720-93fd-026a8b489bf2/" target="_blank" class="edu-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          View Credly Badge
+        </a>
       </div>
     </div>
   </div>
@@ -669,18 +826,17 @@ class NetworkCanvas{
     this.nodes=[];this.nodeCount=nodeCount;
     this.mouse={x:-1e3,y:-1e3};
     this.CONNECT=140;this.MOUSE=180;
+    this.section=canvas.closest('section')||canvas.parentElement.parentElement;
     this.resize();this.init();this.animate();
-    const parent=canvas.parentElement;
-    parent.addEventListener('mousemove',e=>{
+    this.section.addEventListener('mousemove',e=>{
       const r=canvas.getBoundingClientRect();
       this.mouse.x=e.clientX-r.left;this.mouse.y=e.clientY-r.top;
     });
-    parent.addEventListener('mouseleave',()=>{this.mouse.x=-1e3;this.mouse.y=-1e3});
+    this.section.addEventListener('mouseleave',()=>{this.mouse.x=-1e3;this.mouse.y=-1e3});
     window.addEventListener('resize',()=>this.resize());
   }
   resize(){
-    const p=this.canvas.parentElement;
-    this.canvas.width=p.offsetWidth;this.canvas.height=p.offsetHeight;
+    this.canvas.width=this.section.offsetWidth;this.canvas.height=this.section.offsetHeight;
   }
   init(){
     this.nodes=[];
@@ -719,12 +875,71 @@ class NetworkCanvas{
     requestAnimationFrame(()=>this.animate());
   }
 }
-new NetworkCanvas(document.getElementById('network-hero'),200);
-new NetworkCanvas(document.getElementById('network-about'),80);
+new NetworkCanvas(document.getElementById('network-hero'),250);
+new NetworkCanvas(document.getElementById('network-about'),150);
+
+// ── DAG Status Cycling ──
+// ╔══════════════════════════════════════════════════════════╗
+// ║  TIMING CONTROLS — edit these to change DAG speed       ║
+// ║                                                         ║
+// ║  TASK_LAG_MS:  delay between each task starting (ms)    ║
+// ║                larger = more pause between tasks         ║
+// ║  RUNNING_MS:   how long a task stays "running" (ms)     ║
+// ║  HOLD_MS:      pause after all tasks succeed before     ║
+// ║                resetting the cycle (ms)                 ║
+// ╚══════════════════════════════════════════════════════════╝
+const TASK_LAG_MS = 1800;   // gap between each task starting
+const RUNNING_MS = 1000;    // time spent in "running" state
+const HOLD_MS = 3000;       // pause at end before restart
+
+const dagTasks = document.querySelectorAll('.dag-task');
+
+function setTaskState(task, state){
+  const dot = task.querySelector('.dag-status-dot');
+  const txt = task.querySelector('.dag-status-text');
+  dot.className.baseVal = 'dag-status-dot ' + state;
+  txt.className.baseVal = 'dag-status-text ' + state;
+  txt.textContent = state;
+}
+
+function setActiveTask(index){
+  dagTasks.forEach((t, i) => {
+    t.classList.toggle('active', i === index);
+  });
+}
+
+function runDagCycle(){
+  // Reset all to queued, no highlight
+  dagTasks.forEach(t => {
+    setTaskState(t, 'queued');
+    t.classList.remove('active');
+  });
+
+  dagTasks.forEach((task, i) => {
+    const startAt = i * TASK_LAG_MS;
+
+    // → running (highlight moves here)
+    setTimeout(() => {
+      setActiveTask(i);
+      setTaskState(task, 'running');
+    }, startAt);
+
+    // → success (highlight stays until next task starts)
+    setTimeout(() => {
+      setTaskState(task, 'success');
+    }, startAt + RUNNING_MS);
+  });
+
+  // After last task succeeds, hold then restart
+  const totalDur = (dagTasks.length - 1) * TASK_LAG_MS + RUNNING_MS + HOLD_MS;
+  setTimeout(runDagCycle, totalDur);
+}
+
+runDagCycle();
 
 // ── Typing Animation ──
 const typingEl=document.getElementById('typing-target');
-const words=['ENGINEER','ARCHITECT'];
+const words=['ENGINEER','ARCHITECT','PLATFORM ENGINEER'];
 let wordIndex=0,charIndex=0,isDeleting=false;
 function typeLoop(){
   const w=words[wordIndex];typingEl.classList.remove('blink');
