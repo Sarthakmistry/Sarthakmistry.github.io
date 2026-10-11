@@ -651,15 +651,15 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
   </div>
   <div class="exp-grid">
     <div class="exp-item reveal">
-      <div class="exp-date">Jan 2026 &ndash; May 2026</div>
+      <div class="exp-date">Jan 2026 &ndash; Present</div>
       <div class="exp-content">
-        <div class="exp-role">Graduate Research Assistant</div>
-        <div class="exp-company">Indiana University, Bloomington</div>
+        <div class="exp-role">Research Assistant &mdash; Data Infrastructure</div>
+        <div class="exp-company">Indiana University, Dept. of Statistics</div>
         <ul class="exp-desc">
-          <li>Integrated multi-cloud storage backends (AWS S3, GCS, Azure Blob) into the R interface of OpenBT, an open-source Bayesian ML library, enabling portable model persistence</li>
-          <li>Containerized the analysis environment (Docker, RStudio) for reproducible deployment and designed validation benchmarks for the C++ to Rust migration</li>
+          <li>Developing a CGM cyber-attack detector, reaching 0.998 AUC-PR in development testing, by building a leakage-free time-series pipeline with feature engineering and BART model</li>
+          <li>Enabled portable, reproducible Bayesian ML workflows across clouds by adding AWS S3, GCS, and Azure Blob backends and a Dockerized RStudio environment to the OpenBT project</li>
         </ul>
-        <div class="exp-tags"><span class="tag">R</span><span class="tag">Docker</span><span class="tag">AWS S3</span><span class="tag">GCS</span><span class="tag">Azure Blob</span><span class="tag">Rust</span></div>
+        <div class="exp-tags"><span class="tag">Python</span><span class="tag">R</span><span class="tag">BART</span><span class="tag">Docker</span><span class="tag">AWS S3</span><span class="tag">GCS</span><span class="tag">Azure Blob</span></div>
       </div>
     </div>
     <div class="exp-item reveal">
@@ -691,26 +691,26 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
         <div class="exp-role">Data Engineer</div>
         <div class="exp-company">Piramal Capital &amp; Housing Finance, Mumbai</div>
         <ul class="exp-desc">
-          <li>Built batch ETL pipelines (Spark, Airflow) ingesting 5M+ daily records from Salesforce, MongoDB, SQL Server and REST APIs into Snowflake</li>
-          <li>Deployed a real-time CDC pipeline (Debezium, Kafka, Spark Structured Streaming) processing 200K+ updates/hour at sub-minute latency, feeding Grafana dashboards</li>
-          <li>Implemented a 150-feature regulatory data mart (AWS Lambda, S3, Snowflake), cutting audit-reporting turnaround by ~40%</li>
-          <li>Built automated PII detection and masking (regex, Snowflake dynamic masking) with 93% precision across 1M+ records</li>
-          <li>Optimized AWS Lambda flat-file to Snowflake ingestion, increasing throughput by 46%</li>
-          <li>Automated an economic-indicator scraping pipeline (Python, Selenium), reducing manual effort by 73%</li>
+          <li>Built batch ETL pipelines using Databricks, ingesting 5TB+ of data daily from Salesforce, MongoDB, SQL Server, and REST APIs into Delta Lake and Snowflake, cutting loan-approval turnaround by ~25%</li>
+          <li>Deployed real-time CDC pipeline (Debezium, Kafka, Apache Flink) processing 450K+ updates/hour, enabling live monitoring of $500M in monthly loan disbursements on Apache Superset</li>
+          <li>Implemented a 150-feature regulatory data mart using dbt models on Snowflake, with tested, version-controlled transformations, cutting the compliance team's audit-reporting turnaround by ~40%</li>
+          <li>Designed PII-masked feature pipelines (Databricks, Delta Lake) combining S3 and Snowflake data for credit-risk models on SageMaker, achieving 93% masking precision across 7M+ customer records</li>
+          <li>Reduced monthly cloud spend by ~30% through Databricks job clusters with spot instances and Snowflake warehouse right-sizing, while maintaining daily refresh SLAs across ~150TB warehouse</li>
+          <li>Partnered with the Chief Economist to automate an economic-indicator scraping pipeline (Python, Selenium, Airflow) into Snowflake, reducing manual effort by 73% and enabling weekly macro reporting</li>
         </ul>
-        <div class="exp-tags"><span class="tag">Snowflake</span><span class="tag">Spark</span><span class="tag">Kafka</span><span class="tag">Airflow</span><span class="tag">AWS</span><span class="tag">Debezium</span><span class="tag">Grafana</span></div>
+        <div class="exp-tags"><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">Snowflake</span><span class="tag">Kafka</span><span class="tag">Flink</span><span class="tag">Debezium</span><span class="tag">dbt</span><span class="tag">Airflow</span><span class="tag">AWS</span><span class="tag">Superset</span></div>
       </div>
     </div>
     <div class="exp-item reveal">
       <div class="exp-date">Oct 2021 &ndash; Mar 2022</div>
       <div class="exp-content">
         <div class="exp-role">Data Engineering Intern</div>
-        <div class="exp-company">NSEIT, Mumbai</div>
+        <div class="exp-company">NSEIT &ndash; Dex Analytics, Mumbai</div>
         <ul class="exp-desc">
-          <li>Engineered CI/CD for 20+ dbt models on PostgreSQL, automating data modeling and reducing dashboard query latency by 40%</li>
-          <li>Designed automated dbt schema validations and data quality tests, reducing ingestion errors by 25% for Kibana visualizations</li>
+          <li>Scaled post-exam analytics for a 7.3M candidate recruitment drive by building Spark batch pipelines on PostgreSQL/SQL Server, cutting scorecard query latency by 40%</li>
+          <li>Designed dbt schema validations and data quality tests on PostgreSQL for proctoring data from 237+ exam centers, reducing ingestion errors by 25% for Kibana dashboards</li>
         </ul>
-        <div class="exp-tags"><span class="tag">dbt</span><span class="tag">PostgreSQL</span><span class="tag">Kibana</span><span class="tag">CI/CD</span></div>
+        <div class="exp-tags"><span class="tag">Spark</span><span class="tag">dbt</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">Kibana</span></div>
       </div> 
     </div>
   </div>
@@ -739,13 +739,13 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
             GitHub
           </a>
         </div>
-        <div class="project-stack">Airflow &middot; Astronomer &middot; DBT &middot; Snowflake &middot; Great Expectations</div>
-        <div class="project-desc">End-to-end analytics pipeline on Snowflake with a 4-layer medallion architecture (RAW → Staging → Data Vault 2.0 → Star Schema) across 17 dbt models on ~100GB of TPC-DS data.</div>
+        <div class="project-stack">Airflow &middot; dbt &middot; Snowflake &middot; Great Expectations</div>
+        <div class="project-desc">Production-grade medallion pipeline (RAW → staging → Data Vault → star schema/OBT) across 17 dbt models on TPC-DS SF10 (~10GB, 25 tables) in Snowflake.</div>
         <ul class="project-bullets">
-          <li>50+ Great Expectations checks with quarantine-not-hard-fail routing of bad records to a triage table</li>
-          <li>Data Vault 2.0 (3 hubs, 2 satellites, 1 link) with MD5 hash-diff and SCD Type 2 via dbt snapshots</li>
-          <li>2 Airflow DAGs via Astro CLI and Cosmos, one task per dbt model for per-model retries</li>
-          <li>Downstream OBT with RFM segmentation, MoM growth and rolling revenue windows</li>
+          <li>Airflow DAGs (Astro CLI, Astronomer Cosmos) with per-model retries</li>
+          <li>50+ Great Expectations checks across 7 suites, with quarantine routing for analyst triage instead of hard pipeline failure</li>
+          <li>Data Vault 2.0 with MD5 hash-diff and SCD Type 2 history</li>
+          <li>OBT with RFM customer segmentation</li>
         </ul>
       </div>
 
@@ -756,18 +756,18 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
           <span>Architecture Diagram</span>
         </div>
         <div class="project-top">
-          <div class="project-name">Blockchain Streaming Pipeline</div>
+          <div class="project-name">Real-Time Transaction Streaming &amp; Anomaly Detection</div>
           <a href="https://github.com/Sarthakmistry/Blockchain-pipeline" target="_blank" class="project-gh">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             GitHub
           </a>
         </div>
-        <div class="project-stack">SPARK &middot; TRINO &middot; HUDI &middot; KAFKA &middot; SPARKML &middot; BIGQUERY</div>
-        <div class="project-desc">Self-managed 3-node Kappa architecture cluster processing ~500 live Bitcoin transactions/min.</div>
+        <div class="project-stack">KAFKA &middot; SPARK &middot; HUDI &middot; TRINO</div>
+        <div class="project-desc">Self-managed 3-node cluster (Kafka, Spark, Trino) processing ~500 live Bitcoin transactions/min from a WebSocket feed.</div>
         <ul class="project-bullets">
-          <li>SparkML KMeans model trained on BigQuery's Bitcoin dataset to score anomalies</li>
-          <li>Spark Structured Streaming job writing scored results to Apache Hudi tables</li>
-          <li>Trino + Hive Metastore query layer for low-latency ad-hoc SQL analysis</li>
+          <li>SparkML KMeans anomaly-detection model deployed as a Spark Structured Streaming job scoring transactions in-flight</li>
+          <li>Results persisted to Apache Hudi tables on HDFS</li>
+          <li>Scored results exposed through Trino with Hive Metastore for low-latency ad-hoc SQL investigation of flagged transactions</li>
         </ul>
       </div>
 
@@ -778,19 +778,17 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
           <span>Architecture Diagram</span>
         </div>
         <div class="project-top">
-          <div class="project-name">Data Lineage Application</div>
+          <div class="project-name">Snowflake Lineage</div>
           <a href="https://github.com/Sarthakmistry/DataLineage" target="_blank" class="project-gh">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             GitHub
           </a>
         </div>
-        <div class="project-stack">SNOWFLAKE &middot; DJANGO &middot; VISJS &middot; React</div>
-        <div class="project-desc">Interactive visualization of table and column-level data lineage with dynamic graph traversal.</div>
+        <div class="project-stack">REACT &middot; VIS.JS &middot; DJANGO &middot; SNOWFLAKE</div>
+        <div class="project-desc">Full-stack lineage tool mapping Snowflake table and column dependencies from account metadata to increase observability.</div>
         <ul class="project-bullets">
-          <li>Complex SQL integrating Snowflake metadata views</li>
-          <li>Django REST APIs generating lineage graph nodes &amp; edges</li>
-          <li>VisJS frontend with search, expand, hover, inspection</li>
-          <li>Dynamic upstream/downstream traversal logic</li>
+          <li>React/Vis.js frontend backed by a Django API</li>
+          <li>Cut column-level impact analysis from ~30 minutes of manual SQL tracing to under 10 seconds of visual exploration</li>
         </ul>
       </div>
 
@@ -820,23 +818,23 @@ body.loaded nav{animation:fadeUp .8s ease .1s forwards}
       <div class="skill-groups">
         <div class="skill-group reveal">
           <div class="skill-label"><i>01</i>Languages &amp; Query</div>
-          <div class="skill-chips"><span class="chip core" style="--i:0">Python</span><span class="chip core" style="--i:1">SQL</span><span class="chip" style="--i:2">PySpark</span><span class="chip" style="--i:3">JavaScript</span><span class="chip" style="--i:4">Rust</span><span class="chip" style="--i:5">Bash</span></div>
+          <div class="skill-chips"><span class="chip core" style="--i:0">Python</span><span class="chip core" style="--i:1">SQL</span><span class="chip" style="--i:2">Bash</span><span class="chip" style="--i:3">JavaScript</span></div>
         </div>
         <div class="skill-group reveal">
           <div class="skill-label"><i>02</i>Data Engineering</div>
-          <div class="skill-chips"><span class="chip core" style="--i:0">Snowflake</span><span class="chip core" style="--i:1">Spark</span><span class="chip core" style="--i:2">Kafka</span><span class="chip core" style="--i:3">Airflow</span><span class="chip core" style="--i:4">dbt</span><span class="chip" style="--i:5">Debezium</span><span class="chip" style="--i:6">Trino</span><span class="chip" style="--i:7">Hudi</span><span class="chip" style="--i:8">PostgreSQL</span><span class="chip" style="--i:9">MongoDB</span><span class="chip" style="--i:10">SQL Server</span></div>
+          <div class="skill-chips"><span class="chip core" style="--i:0">Snowflake</span><span class="chip core" style="--i:1">dbt</span><span class="chip core" style="--i:2">Apache Airflow</span><span class="chip core" style="--i:3">Kafka</span><span class="chip core" style="--i:4">Spark (PySpark, Structured Streaming)</span><span class="chip" style="--i:5">Debezium CDC</span><span class="chip" style="--i:6">Trino/Presto</span><span class="chip" style="--i:7">Apache Hudi</span><span class="chip" style="--i:8">ELT/ETL</span></div>
         </div>
         <div class="skill-group reveal">
           <div class="skill-label"><i>03</i>Modeling &amp; Quality</div>
-          <div class="skill-chips"><span class="chip" style="--i:0">Data Vault 2.0</span><span class="chip" style="--i:1">Star Schema</span><span class="chip" style="--i:2">SCD Type 2</span><span class="chip" style="--i:3">Dimensional Modeling</span><span class="chip" style="--i:4">Great Expectations</span><span class="chip" style="--i:5">Data Lineage</span></div>
+          <div class="skill-chips"><span class="chip" style="--i:0">Star Schema</span><span class="chip" style="--i:1">Data Vault</span><span class="chip" style="--i:2">SCD Type 2</span><span class="chip" style="--i:3">Kimball Dimensional Modeling</span><span class="chip" style="--i:4">OBT</span><span class="chip" style="--i:5">Great Expectations</span></div>
         </div>
         <div class="skill-group reveal">
-          <div class="skill-label"><i>04</i>Infrastructure</div>
-          <div class="skill-chips"><span class="chip core" style="--i:0">AWS</span><span class="chip" style="--i:1">Docker</span><span class="chip" style="--i:2">Kubernetes</span><span class="chip" style="--i:3">Terraform</span><span class="chip" style="--i:4">Talend</span><span class="chip" style="--i:5">Git</span><span class="chip" style="--i:6">Astro CLI</span></div>
+          <div class="skill-label"><i>04</i>Cloud &amp; Infrastructure</div>
+          <div class="skill-chips"><span class="chip core" style="--i:0">AWS (S3, Lambda, EMR)</span><span class="chip" style="--i:1">GCP (BigQuery)</span><span class="chip" style="--i:2">Docker</span><span class="chip" style="--i:3">Git</span><span class="chip" style="--i:4">CI/CD</span></div>
         </div>
         <div class="skill-group reveal">
-          <div class="skill-label"><i>05</i>Visualization &amp; BI</div>
-          <div class="skill-chips"><span class="chip" style="--i:0">Grafana</span><span class="chip" style="--i:1">Power BI</span><span class="chip" style="--i:2">Streamlit</span><span class="chip" style="--i:3">ELK / Kibana</span></div>
+          <div class="skill-label"><i>05</i>Governance &amp; BI</div>
+          <div class="skill-chips"><span class="chip" style="--i:0">Snowflake Dynamic Data Masking</span><span class="chip" style="--i:1">RBAC</span><span class="chip" style="--i:2">PII Detection</span><span class="chip" style="--i:3">Grafana</span><span class="chip" style="--i:4">Power BI</span><span class="chip" style="--i:5">Streamlit</span></div>
         </div>
       </div>
     </div>
